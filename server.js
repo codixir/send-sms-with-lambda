@@ -82,6 +82,7 @@ router.delete('/:id', asyncHandler(async(req, res, next) => {
 }));
 
 //Send SMS
+//pass in the query param as `/send/?id=12345`
 router.post('/send', asyncHandler(async (req, res, next) => {
   const { id } = req.query;
 
