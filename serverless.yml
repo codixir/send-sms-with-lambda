@@ -1,0 +1,21 @@
+service: customers-sms-1
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+
+functions:
+  app:
+    handler: server.run
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY 
+          cors: true
+plugins:
+  - serverless-offline
