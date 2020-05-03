@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Connect
-const url = `YOUR_MONGO_CONNECTION_URL`;
+const url = `mongodb+srv://user2:********@cluster0-xylgd.mongodb.net/test?retryWrites=true&w=majority`;
 mongoose.connect(url);
 
 //Schemas
@@ -99,8 +99,9 @@ router.post('/send', asyncHandler(async (req, res, next) => {
       PhoneNumber: customer.phoneNumber,
     }
 
-    const response = await SNS.publish(payload).promise();
-    res.status(200).send(response);
+    const response = await SNS.publish(payload).promise();    
+    const messageResponse = Message.create({ message: req.body.message });
+    res.status(200).send(messageResponse);      
   }
 }));
 
